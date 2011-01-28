@@ -32,13 +32,13 @@ class WP_Tumblr_Widget extends WP_Widget {
 					tumblr.writeTumblrList('<?php echo $tumblr_blog_name; ?>-widget', json);
 				}
 			</script>
-		<?php }
+		<?php
+			add_action('wp_footer',
+				create_function('', 'echo \'<script type="text/javascript" src="http://' . $tumblr_blog_name . '.tumblr.com/api/read/json?num=' .
+					$instance['tumblr_post_limit'] . '&callback=tumblr_' . $tumblr_blog_name . 'Out"></script>\';')
+			);
+		}
 		echo $after_widget;
-		
-		add_action('wp_footer',
-			create_function('', 'echo \'<script type="text/javascript" src="http://' . $instance['tumblr_blog_name'] . '.tumblr.com/api/read/json?num=' .
-				$instance['tumblr_post_limit'] . '&callback=tumblr_' . $instance['tumblr_blog_name'] . 'Out"></script>\';')
-		);
 	}
 		
 	function update($new_instance, $old_instance) {
@@ -55,8 +55,9 @@ class WP_Tumblr_Widget extends WP_Widget {
 			<p>
 				<label for="<?php echo $this->get_field_id('tumblr_blog_name'); ?>"><?php _e('Tumblr Blog Name:'); ?> <input class="widefat" id="<?php echo $this->get_field_id('tumblr_blog_name'); ?>" name="<?php echo $this->get_field_name('tumblr_blog_name'); ?>" type="text" value="<?php echo $tumblr_blog_name; ?>" /></label>
 				<label for="<?php echo $this->get_field_id('tumblr_post_limit'); ?>"><?php _e('Number of Posts:'); ?> <select class="widefat" id="<?php echo $this->get_field_id('tumblr_post_limit'); ?>" name="<?php echo $this->get_field_name('tumblr_post_limit'); ?>"><?php
-					for ( $i = 1; $i <= 10; ++$i )
-						echo "<option value='$i' " . ( $tumblr_post_limit == $i ? "selected='selected'" : '' ) . ">$i</option>";
+					for ( $i = 1; $i <= 10; ++$i ) {
+						echo "<option value=\"$i\" " . ( $tumblr_post_limit == $i ? 'selected="selected"' : '' ) . ">$i</option>";
+					}
 				?></select></label>
 			</p>
 		<?php
