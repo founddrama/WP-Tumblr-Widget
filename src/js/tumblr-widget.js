@@ -1,6 +1,14 @@
+/**
+ * @namespace {tumblr}
+ * @requires {jQuery} - http://jquery.com/
+ */
 if (!window.tumblr) {
 	// WARNING : global var ahead!
 	tumblr = {
+		/**
+		 * @param {String} txt - the text to shorten
+		 * @return {String} the shortened text
+		 */
 		shortnr: function(txt){
 			if (txt.length > 100) {
 				txt = txt.substr(0, 100);
@@ -9,14 +17,20 @@ if (!window.tumblr) {
 			return txt;
 		},
 		
-		buildTumbls: function(json, id){
+		/**
+		 * @param {JSON} json
+		 * @return {String} html-as-string for the ul
+		 */
+		buildTumbls: function(json){
 			var	posts = json.posts,
-				ulString = '<ul>';
+				ul = ['<ul>'],
+				p,
+				txt;
 
 			while (posts.length > 0) {
-				var p = posts.shift(),
-					li = ['<li><a href="', p.url, '">'],
-					txt;
+				p = posts.shift();
+				
+				ul.push('<li><a href="', p.url, '">');
 
 				switch(p.type){
 					case 'audio':
@@ -42,21 +56,24 @@ if (!window.tumblr) {
 						break;
 				}
 
-				li.push(txt, '</a></li>');
-
-				ulString += li.join('');
+				ul.push(txt, '</a></li>');
 			}
-
-			return ulString;
+			
+			ul.push('</ul>');
+			return ul.join('');
 		},
 		
+		/**
+		 * @param {String} divId - the id of the destination div
+		 * @param {JSON} json
+		 */
 		writeTumblrList: function(divId, json){
 			var	blog = json.tumblelog,
 				posts = tumblr.buildTumbls(json),
-				widget	= $("#" + divId);
+				widget = $('#' + divId);
 
-			widget.closest("li").children("h3")
-				.addClass("tumblr-list")
+			widget.closest('li').children('h3')
+				.addClass('tumblr-list')
 				.empty().append(blog.title)
 				.wrap('<a href="http://'+blog.name+'.tumblr.com/" />');
 			widget.append(posts);
