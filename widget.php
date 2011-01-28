@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: WP Tumblr Widget
- * Version: 0.1
+ * Version: 0.2
  * Plugin URI: https://github.com/founddrama/WP-Tumblr-Widget
  * Description: Plugin taps into the Tumblr API to suck in content from a
  * Tumblr tumblog and display it in a sidebar widget.  And unfortunately (for
