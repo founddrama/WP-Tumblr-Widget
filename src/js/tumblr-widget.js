@@ -37,7 +37,7 @@ if (!window.tumblr) {
 						txt = p['audio-caption'].replace(/<\/?[A-Za-z]+>/g, '') || '(audio)';
 						break;
 					case 'conversation':
-						txt = p['conversation-title'];
+						txt = p['conversation-title'] || tumblr.shortnr(p['conversation-text']);
 						break;
 					case 'link':
 						txt = p['link-text'];
