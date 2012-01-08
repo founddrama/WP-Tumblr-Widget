@@ -30,7 +30,7 @@ if (!window.tumblr) {
       while (posts.length > 0) {
         p = posts.shift();
         
-        ul.push('<li><a href="', p.url, '">');
+        ul.push('<li>');
 
         switch(p.type){
           case 'audio':
@@ -43,7 +43,7 @@ if (!window.tumblr) {
             txt = p['link-text'];
             break;
           case 'photo':
-            txt = p['photo-caption'] || 'uncaptioned';
+            txt = p['photo-caption'] || '(uncaptioned)';
             break;
           case 'quote':
             txt = tumblr.shortnr(p['quote-text']);
@@ -56,7 +56,7 @@ if (!window.tumblr) {
             break;
         }
 
-        ul.push(txt, '</a></li>');
+        ul.push(txt, '\u00A0\u00BB\u00A0<a href="', p.url, '">link</a></li>');
       }
       
       ul.push('</ul>');
@@ -69,8 +69,8 @@ if (!window.tumblr) {
      */
     writeTumblrList: function(divId, json){
       var blog = json.tumblelog,
-        posts = tumblr.buildTumbls(json),
-        widget = $('#' + divId);
+          posts = tumblr.buildTumbls(json),
+          widget = $('#' + divId);
 
       widget.closest('li').children('h3')
         .addClass('tumblr-list')
