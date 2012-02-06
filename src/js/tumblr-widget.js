@@ -22,10 +22,9 @@ if (!window.tumblr) {
      * @return {String} html-as-string for the ul
      */
     buildTumbls: function(json){
-      var posts = json.posts,
-        ul = ['<ul>'],
-        p,
-        txt;
+      var posts = json.posts;
+      var ul = ['<ul>'];
+      var p, txt;
 
       while (posts.length > 0) {
         p = posts.shift();
@@ -68,14 +67,14 @@ if (!window.tumblr) {
      * @param {JSON} json
      */
     writeTumblrList: function(divId, json){
-      var blog = json.tumblelog,
-          posts = tumblr.buildTumbls(json),
-          widget = $('#' + divId);
+      var blog = json.tumblelog;
+      var posts = tumblr.buildTumbls(json);
+      var widget = $('#' + divId);
 
       widget.closest('li').children('h3')
         .addClass('tumblr-list')
-        .empty().append(blog.title)
-        .wrap('<a href="http://'+blog.name+'.tumblr.com/" />');
+        .empty()
+        .append('<a href="http://'+blog.name+'.tumblr.com/">' + blog.title + '</a>');
       widget.append(posts);
     }
   };
