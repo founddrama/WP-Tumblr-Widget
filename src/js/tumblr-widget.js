@@ -42,7 +42,7 @@ if (!window.tumblr) {
             txt = p['link-text'];
             break;
           case 'photo':
-            txt = p['photo-caption'] || '(uncaptioned)';
+            txt = tumblr.shortnr(p['photo-caption']) || '(uncaptioned)';
             break;
           case 'quote':
             txt = tumblr.shortnr(p['quote-text']);
