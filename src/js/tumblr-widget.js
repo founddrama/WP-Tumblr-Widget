@@ -11,6 +11,8 @@ if (!window.tumblr) {
      */
     shortnr: function(txt){
       if (txt.length > 100) {
+        // naïve HTML stripper:
+        txt = txt.replace(/<(?:.|\s)*?>/g, '');
         txt = txt.substr(0, 100);
         txt = txt.substr(0, txt.lastIndexOf(' ')) + '...';
       }
