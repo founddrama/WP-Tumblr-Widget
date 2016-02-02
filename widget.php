@@ -1,13 +1,13 @@
 <?php
 /**
  * Plugin Name: WP Tumblr Widget
- * Version: 0.2
+ * Version: 0.3
  * Plugin URI: https://github.com/founddrama/WP-Tumblr-Widget
  * Description: Plugin taps into the Tumblr API to suck in content from a
  * Tumblr tumblog and display it in a sidebar widget.  And unfortunately (for
  * now) it is dependent on jQuery.
  * Author: Rob Friesel
- * Author URI: http://blog.founddrama.net
+ * Author URI: https://blog.founddrama.net
 */
 
 class WP_Tumblr_Widget extends WP_Widget {
@@ -34,7 +34,7 @@ class WP_Tumblr_Widget extends WP_Widget {
 			</script>
 		<?php
 			add_action('wp_footer',
-				create_function('', 'echo \'<script type="text/javascript" src="http://' . $tumblr_blog_name . '.tumblr.com/api/read/json?num=' .
+				create_function('', 'echo \'<script type="text/javascript" src="https://' . $tumblr_blog_name . '.tumblr.com/api/read/json?num=' .
 					$instance['tumblr_post_limit'] . '&callback=tumblr_' . $tumblr_blog_name . 'Out"></script>\';')
 			);
 		}
